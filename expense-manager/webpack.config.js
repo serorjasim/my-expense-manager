@@ -3,12 +3,13 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: './client/index.js',
+  mode: 'development',
   output: {
     path: path.join(__dirname, 'client'),
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /.jsx?$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
