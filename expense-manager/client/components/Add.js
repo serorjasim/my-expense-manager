@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 var querystring = require('querystring');
+
 class Add extends React.Component {
   constructor() {
     super();
@@ -22,11 +23,13 @@ class Add extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
   openModal() {
     this.setState({
       modalIsOpen: true
     });
   }
+
   closeModal() {
     this.setState({
       modalIsOpen: false,
@@ -37,6 +40,7 @@ class Add extends React.Component {
       messageFromServer: ''
     });
   }
+
   componentDidMount() {
     this.setState({
       month: this.props.selectedMonth
@@ -45,6 +49,7 @@ class Add extends React.Component {
       year: this.props.selectedYear
     });
   }
+
   handleSelectChange(e) {
     if (e.target.name == 'month') {
       this.setState({
@@ -57,6 +62,7 @@ class Add extends React.Component {
       });
     }
   }
+
   onClick(e) {
     this.insertNewExpense(this);
   }
@@ -77,6 +83,7 @@ class Add extends React.Component {
         });
       });
   }
+
   handleTextChange(e) {
     if (e.target.name == "description") {
       this.setState({
@@ -89,6 +96,7 @@ class Add extends React.Component {
       });
     }
   }
+
   render() {
     if (this.state.messageFromServer == '') {
       return (
@@ -102,10 +110,18 @@ class Add extends React.Component {
             <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
               <Button bsStyle="danger" bsSize="mini" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
             </Link><br />
+
             <fieldset>
-              <label for="description">Description:</label><input type="text" id="description" name="description" value={this.state.description} onChange={this.handleTextChange}></input>
-              <label for="amount">Amount:</label><input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
-              <label for="month">Month:</label><select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description"
+                value={this.state.description} onChange={this.handleTextChange}></input>
+
+              <label for="amount">Amount:</label>
+              <input type="number" id="amount" name="amount"
+                value={this.state.amount} onChange={this.handleTextChange}></input>
+
+              <label for="month">Month:</label>
+              <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>
                 <option value="Feb" id="Feb">Febrary</option>
                 <option value="Mar" id="Mar">March</option>
@@ -119,7 +135,9 @@ class Add extends React.Component {
                 <option value="Nov" id="Nov">November</option>
                 <option value="Dec" id="Dec">December</option>
               </select>
-              <label for="year">Year:</label><select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
+
+              <label for="year">Year:</label>
+              <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
                 <option value="2016" id="16">2016</option>
                 <option value="2017" id="17">2017</option>
                 <option value="2018" id="18">2018</option>
