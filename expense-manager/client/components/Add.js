@@ -149,6 +149,7 @@ class Add extends React.Component {
                 <option value="2020" id="20">2020</option>
               </select>
             </fieldset>
+
             <div className='button-center'>
               <br />
               <Button bsStyle="success" bsSize="small" onClick={this.onClick}>Add New Expense</Button>
@@ -167,8 +168,10 @@ class Add extends React.Component {
             onRequestClose={this.closeModal}
             contentLabel="Add Expense"
             className="Modal">
+
             <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
+
               <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
                 <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
               </Link>
