@@ -41,7 +41,7 @@ class Delete extends React.Component {
   render() {
     return (
       <Button bsStyle="danger" bsSize="small" onClick={this.onClick}>
-        <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+        <Link to={{ pathname: '/', search: '?month=' + this.state.month + '&year=' + this.state.year }} style={{ textDecoration: 'none' }}>
           <span className="glyphicon glyphicon-remove"></span>
         </Link>
       </Button>
