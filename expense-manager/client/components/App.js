@@ -14,7 +14,8 @@ export default class App extends React.Component {
     this.state = {
       selectedMonth: 'All',
       selectedYear: 2016,
-      data: []
+      data: [],
+      activeTab: 2016
     };
     this.getData = this.getData.bind(this);
   }
