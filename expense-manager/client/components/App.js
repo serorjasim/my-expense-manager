@@ -21,23 +21,50 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getData(this, '2016');
-  }
-  componentWillReceiveProps(nextProps) {
-    this.getData(this, '2016');
+    this.getData(this, 2016, 'All');
   }
 
-  getData(ev, year) {
-    axios.get('/getAll?month=All&year=' + year)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.history.location.search) {
+      var search = nextProps.history.location.search;
+      search = search.substring(1);
+      var searchObj = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+      this.setState({ activeTab: parseInt(searchObj.year) });
+      this.setState({ selectedYear: searchObj.year });
+      this.setState({ selectedMonth: searchObj.month });
+      this.getData(this, searchObj.year, searchObj.month);
+    } else {
+      this.getData(this, 2016, 'All');
+    }
+  }
+
+  handleSelect(selectedTab) {
+    this.setState({
+      activeTab: selectedTab,
+      selectedYear: selectedTab
+    });
+  }
+
+  getData(ev, year, month) {
+    axios.get('/getAll?month' + month + '&year=' + year)
       .then(function (response) {
         ev.setState({ data: response.data });
-        ev.setState({ selectedYear: parseInt(year) })
+        ev.setState({ selectedYear: parseInt(year) });
+        ev.setState({ selectedMonth: month });
       });
   }
 
   render() {
     return (
       <div>
+        <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
+          <Tab eventKey={2016} title={<YearTabsRouter year='2016' />}></Tab>
+          <Tab eventKey={2017} title={<YearTabsRouter year='2017' />}></Tab>
+          <Tab eventKey={2018} title={<YearTabsRouter year='2018' />}></Tab>
+          <Tab eventKey={2019} title={<YearTabsRouter year='2019' />}></Tab>
+          <Tab eventKey={2020} title={<YearTabsRouter year='2020' />}></Tab>
+        </Tabs>
+
         <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
 
         <table>
@@ -62,7 +89,7 @@ export default class App extends React.Component {
                   <td className='button-col'>{exp.month}</td>
                   <td className='button-col'>{exp.year}</td>
                   <td className='button-col'><Update expense={exp} /></td>
-                  <td className='button-col'><Delete id={exp._id} expense={exp} /></td>
+                  <td className='button-col'><Delete expense={exp} /></td>
                 </tr>
               })
             }
