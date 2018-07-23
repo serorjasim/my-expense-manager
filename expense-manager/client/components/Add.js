@@ -44,12 +44,33 @@ class Add extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      month: this.props.selectedMonth
-    });
+    if (this.props.selectedMonth == 'All') {
+      this.setState({
+        month: 'Jan'
+      });
+    } else {
+      this.setState({
+        month: this.props.selectedMonth
+      });
+    }
     this.setState({
       year: this.props.selectedYear
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selectedMonth == 'All') {
+      this.setState({
+        month: 'Jan'
+      });
+    } else {
+      this.setState({
+        month: this.props.selectedMonth
+      });
+    }
+    this.setState({
+      year: nextProps.selectedYear
+    })
   }
 
   handleSelectChange(e) {
