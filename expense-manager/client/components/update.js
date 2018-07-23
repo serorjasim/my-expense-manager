@@ -4,7 +4,9 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 var querystring = require('querystring');
+
 class Update extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -23,6 +25,7 @@ class Update extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       id: this.props.expense._id,
@@ -32,6 +35,7 @@ class Update extends React.Component {
       year: this.props.expense.year
     });
   }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       id: nextProps.expense._id,
@@ -40,17 +44,20 @@ class Update extends React.Component {
       year: nextProps.expense.year
     })
   }
+
   openModal() {
     this.setState({
       modalIsOpen: true
     });
   }
+
   closeModal() {
     this.setState({
       modalIsOpen: false,
       messageFromServer: ''
     });
   }
+
   handleSelectChange(e) {
     if (e.target.name == "month") {
       this.setState({
@@ -63,6 +70,7 @@ class Update extends React.Component {
       });
     }
   }
+
   handleTextChange(e) {
     if (e.target.name == "description") {
       this.setState({
@@ -75,9 +83,11 @@ class Update extends React.Component {
       });
     }
   }
+
   onClick(e) {
     this.update(this);
   }
+
   update(e) {
     axios.post('/update',
       querystring.stringify({
@@ -96,23 +106,34 @@ class Update extends React.Component {
         });
       });
   }
+
   render() {
     if (this.state.messageFromServer == '') {
       return (
         <div>
           <Button bsStyle="warning" bsSize="small" onClick={this.openModal}><span className="glyphicon glyphicon-edit"></span></Button>
+
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             contentLabel="Add Expense"
             className="Modal">
+
             <Link to={{ pathname: '/', search: '?month=' + this.state.month + '&year=' + this.state.year }} style={{ textDecoration: 'none' }}>
               <Button bsStyle="danger" bsSize="small" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
-            </Link><br />
+            </Link>
+
+            <br />
+
             <fieldset>
-              <label htmlFor="description">Description:</label><input type="text" id="description" name="description" value={this.state.description} onChange={this.handleTextChange}></input>
-              <label htmlFor="amount">Amount:</label><input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
-              <label htmlFor="month">Month:</label><select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
+              <label htmlFor="description">Description:</label>
+              <input type="text" id="description" name="description" value={this.state.description} onChange={this.handleTextChange}></input>
+
+              <label htmlFor="amount">Amount:</label>
+              <input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
+
+              <label htmlFor="month">Month:</label>
+              <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>
                 <option value="Feb" id="Feb">Febrary</option>
                 <option value="Mar" id="Mar">March</option>
@@ -126,7 +147,9 @@ class Update extends React.Component {
                 <option value="Nov" id="Nov">November</option>
                 <option value="Dec" id="Dec">December</option>
               </select>
-              <label htmlFor="year">Year:</label><select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
+
+              <label htmlFor="year">Year:</label>
+              <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
                 <option value="2015" id="17">2015</option>
                 <option value="2016" id="17">2016</option>
                 <option value="2017" id="17">2017</option>
@@ -135,6 +158,7 @@ class Update extends React.Component {
                 <option value="2020" id="20">2020</option>
               </select>
             </fieldset>
+
             <div className='button-center'>
               <br />
               <Button bsStyle="warning" bsSize="small" onClick={this.onClick}>Update</Button>
@@ -147,14 +171,17 @@ class Update extends React.Component {
       return (
         <div>
           <Button bsStyle="warning" bsSize="small" onClick={this.openModal}><span className="glyphicon glyphicon-edit"></span></Button>
+
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
             contentLabel="Add Expense"
             className="Modal">
+
             <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
+
               <Link to={{ pathname: '/', search: '?month=' + this.state.month + '&year=' + this.state.year }} style={{ textDecoration: 'none' }}>
                 <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
               </Link>
