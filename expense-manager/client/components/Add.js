@@ -70,8 +70,6 @@ class Add extends React.Component {
   }
 
   insertNewExpense(e) {
-
-    console.log('here')
     axios.post('/insert',
       querystring.stringify({
         desc: e.state.description,
@@ -112,6 +110,7 @@ class Add extends React.Component {
             onRequestClose={this.closeModal}
             contentLabel="Add Expense"
             className="Modal">
+
             <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
               <Button bsStyle="danger" bsSize="small" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
             </Link><br />
