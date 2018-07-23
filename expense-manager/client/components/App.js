@@ -5,28 +5,32 @@ import Add from './Add'
 
 export default class App extends React.Component {
 
-constructor() {
+  constructor() {
     super();
-  this.state = {selectedMonth:'Jan', selectedYear: 2016, data: []};
+    this.state = {
+      selectedMonth: 'Jan',
+      selectedYear: 2016,
+      data: []
+    };
     this.getData = this.getData.bind(this);
   }
 
-componentDidMount() {
+  componentDidMount() {
     this.getData(this, '2016');
   }
   componentWillReceiveProps(nextProps) {
     this.getData(this, '2016');
   }
 
-getData(ev, year){
-    axios.get('/getAll?month=All&year='+year)
-      .then(function(response) {
-        ev.setState({data: response.data});
-        ev.setState({selectedYear: parseInt(year)})
+  getData(ev, year) {
+    axios.get('/getAll?month=All&year=' + year)
+      .then(function (response) {
+        ev.setState({ data: response.data });
+        ev.setState({ selectedYear: parseInt(year) })
       });
   }
 
-render() {
+  render() {
     return (
       <div>
         <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
@@ -36,8 +40,8 @@ render() {
           </thead>
           <tbody>
             {
-              this.state.data.map(function(exp){
-                return  <tr><td className='counterCell'></td><td className='desc-col'>{exp.description}</td><td className='button-col'>{exp.amount}</td><td className='button-col'>{exp.month}</td><td className='button-col'>{exp.year}</td></tr>
+              this.state.data.map((exp, index) => {
+                return <tr key={index}><td className='counterCell'></td><td className='desc-col'>{exp.description}</td><td className='button-col'>{exp.amount}</td><td className='button-col'>{exp.month}</td><td className='button-col'>{exp.year}</td></tr>
               })
             }
           </tbody>

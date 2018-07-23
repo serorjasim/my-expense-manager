@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 var querystring = require('querystring');
 
+
 class Add extends React.Component {
   constructor() {
     super();
@@ -66,7 +67,10 @@ class Add extends React.Component {
   onClick(e) {
     this.insertNewExpense(this);
   }
+
   insertNewExpense(e) {
+
+    console.log('here')
     axios.post('/insert',
       querystring.stringify({
         desc: e.state.description,
@@ -108,19 +112,19 @@ class Add extends React.Component {
             contentLabel="Add Expense"
             className="Modal">
             <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
-              <Button bsStyle="danger" bsSize="mini" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
+              <Button bsStyle="danger" bsSize="small" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
             </Link><br />
 
             <fieldset>
-              <label for="description">Description:</label>
+              <label htmlFor="description">Description:</label>
               <input type="text" id="description" name="description"
                 value={this.state.description} onChange={this.handleTextChange}></input>
 
-              <label for="amount">Amount:</label>
+              <label htmlFor="amount">Amount:</label>
               <input type="number" id="amount" name="amount"
                 value={this.state.amount} onChange={this.handleTextChange}></input>
 
-              <label for="month">Month:</label>
+              <label htmlFor="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>
                 <option value="Feb" id="Feb">Febrary</option>
@@ -136,7 +140,7 @@ class Add extends React.Component {
                 <option value="Dec" id="Dec">December</option>
               </select>
 
-              <label for="year">Year:</label>
+              <label htmlFor="year">Year:</label>
               <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
                 <option value="2016" id="16">2016</option>
                 <option value="2017" id="17">2017</option>
@@ -166,7 +170,7 @@ class Add extends React.Component {
             <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
               <Link to={{ pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
-                <Button bsStyle="success" bsSize="mini" onClick={this.closeModal}>Close the Dialog</Button>
+                <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
               </Link>
             </div>
           </Modal>
@@ -175,4 +179,7 @@ class Add extends React.Component {
     }
   }
 }
+
+Modal.setAppElement('body')
+
 export default Add;
