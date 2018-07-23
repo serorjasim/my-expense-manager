@@ -126,6 +126,7 @@ class Add extends React.Component {
       return (
         <div>
           <Button bsStyle="success" bsSize="small" onClick={this.openModal}><span className="glyphicon glyphicon-plus"></span></Button>
+
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
