@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Add from './Add'
-import Update from './Update'
+import Update from './Update';
+import Delete from './Delete'
 
 export default class App extends React.Component {
 
