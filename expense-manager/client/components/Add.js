@@ -118,11 +118,13 @@ class Add extends React.Component {
             <fieldset>
               <label htmlFor="description">Description:</label>
               <input type="text" id="description" name="description"
-                value={this.state.description} onChange={this.handleTextChange}></input>
+                value={this.state.description} onChange={this.handleTextChange}>
+              </input>
 
               <label htmlFor="amount">Amount:</label>
               <input type="number" id="amount" name="amount"
-                value={this.state.amount} onChange={this.handleTextChange}></input>
+                value={this.state.amount} onChange={this.handleTextChange}>
+              </input>
 
               <label htmlFor="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
