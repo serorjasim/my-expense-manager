@@ -17,6 +17,7 @@ class Add extends React.Component {
       messageFromServer: '',
       modalIsOpen: false
     }
+
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
