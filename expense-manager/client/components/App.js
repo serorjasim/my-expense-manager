@@ -45,6 +45,7 @@ export default class App extends React.Component {
               <th className='button-col'>Month</th>
               <th className='button-col'>Year</th>
               <th className='button-col'>Update</th>
+              <th className='button-col'>Delete</th>
             </tr>
           </thead>
 
@@ -58,6 +59,7 @@ export default class App extends React.Component {
                   <td className='button-col'>{exp.month}</td>
                   <td className='button-col'>{exp.year}</td>
                   <td className='button-col'><Update expense={exp} /></td>
+                  <td className='button-col'><Delete id={exp._id} expense={exp} /></td>
                 </tr>
               })
             }
